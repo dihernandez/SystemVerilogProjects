@@ -1,26 +1,21 @@
 module RippleCarryAdder #(parameter ADDR_WIDTH = 16) (
   input logic[ADDR_WIDTH - 1:0] a, b,
   input logic c_in,
-  output logic[ADDR_WIDTH -1:0] sum.
+  output logic[ADDR_WIDTH -1:0] sum,
   output logic c_out
 );
-  integer it 0;
-  wire A, B, C_IN, SUM, C_OUT;
+  wire [ADDR_WIDTH:0] carry;
   
-  FullAdder fadders[ADDR_WIDTH - 1:0](A, B, C_IN, SUM, C_OUT);
+  assign carry[0] = c_in;
   
-  always_comb begin
-    for (it 0; it < ADDR_WIDTH; it it + 1) begin
-      A <= a[it];
-      B <= b[it];
-      if (it == 0) begin
-        C_IN <= c_in;
-      end else begin
-      	C_IN <= C_OUT;
-      end
+  genvar it;
+  generate
+    for (it = 0; it < ADDR_WIDTH; it = it + 1) begin
+      FullAdder fa(.a(a[it]), .b(b[it]), .c_in(carry[it]), .sum(sum[it]), .c_out(carry[it + 1]));
     end
-    c_out <= C_OUT;
-  end
+  endgenerate
+  
+  assign c_out = carry[ADDR_WIDTH];
 endmodule
 
 module FullAdder(
