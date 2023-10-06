@@ -1,9 +1,9 @@
-module TraffickLightsFSM(input logic clk, reset, TA, TB, 
+module TrafficLightsFSM(input logic clk, reset, TA, TB, 
                          output logic[1:0] LA, LB);
 
   parameter S0 = 2'b00;
   parameter S1 = 2'b01;
-  parameter s2 = 2'b10;
+  parameter S2 = 2'b10;
   parameter S3 = 2'b11;
   
   parameter GREEN = 2'b00;
@@ -12,10 +12,11 @@ module TraffickLightsFSM(input logic clk, reset, TA, TB,
 
   logic[1:0] state, next_state;
   
-  always_ff (@posedge clk) begin
+  always_ff @(posedge clk) begin
     if(reset) begin
     	next_state <= S0;
     end else begin
+      state <= next_state;
       case(state)
         S0:
           if(TA)
@@ -38,18 +39,26 @@ module TraffickLightsFSM(input logic clk, reset, TA, TB,
   
   always_comb begin
     case(state)
-      S0:
-        LA <= GREEN;
-        LB <= RED;
+      S0: 
+        begin
+        	LA <= GREEN;
+        	LB <= RED;
+      	end
       S1:
-        LA <= YELLOW;
-      	LB <= RED;
+        begin
+        	LA <= YELLOW;
+      		LB <= RED;
+        end
       S2:
-        LA <= RED;
-      	LB <= GREEN;
+        begin
+        	LA <= RED;
+      		LB <= GREEN;
+        end
       S3:
-        LA <= RED;
-      	LB <= YELLOW;
+        begin
+        	LA <= RED;
+      		LB <= YELLOW;
+        end
     endcase
   end
   

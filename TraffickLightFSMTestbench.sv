@@ -1,4 +1,4 @@
-module TraffickLightsFSMTestbench();
+module TrafficLightsFSMTestbench();
   logic clk, reset, TA, TB;
   logic [1:0] LA, LB;
   
@@ -6,12 +6,12 @@ module TraffickLightsFSMTestbench();
   parameter YELLOW = 2'b01;
   parameter RED  = 2'b10;
   
-  forever begin
+  always begin
   	clk <= 1; #5;
     clk <= 0; #5;
   end
   
-  TraffickLightsFSM dut(clk, reset, TA, TB, LA, LB);
+  TrafficLightsFSM dut(clk, reset, TA, TB, LA, LB);
   
   initial begin
   	// get to state 2 then reset
@@ -21,7 +21,7 @@ module TraffickLightsFSMTestbench();
     reset <= 1'b1;
     #10;
     if(LA !== GREEN | LB !== RED) begin
-      $display("ERROR, not in state S0);
+      $display("ERROR, not in state S0");
     end
   end
   
