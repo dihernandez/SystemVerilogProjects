@@ -15,9 +15,11 @@ module TrafficLightsFSMTestbench();
   
   initial begin
   	// get to state 2 then reset
-    TA <= 1'b1;
+    TA <= 1'b0;
+    TB <= 1'b0;
     #10; // one clock cycle state should be S1 after
     #10; // get to S2
+    #10; // get to S3
     reset <= 1'b1;
     #10;
     if(LA !== GREEN | LB !== RED) begin

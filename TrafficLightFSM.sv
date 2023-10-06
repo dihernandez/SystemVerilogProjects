@@ -11,12 +11,14 @@ module TrafficLightsFSM(input logic clk, reset, TA, TB,
   parameter RED  = 2'b10;
 
   logic[1:0] state, next_state;
+  logic[1:0] traffic_state = S0;
+  assign state = traffic_state;
   
   always_ff @(posedge clk) begin
     if(reset) begin
     	next_state <= S0;
     end else begin
-      state <= next_state;
+      traffic_state <= next_state;
       case(state)
         S0:
           if(TA)
