@@ -43,23 +43,23 @@ module TrafficLightsFSM(input logic clk, reset, TA, TB,
     case(state)
       S0: 
         begin
-        	LA <= GREEN;
-        	LB <= RED;
+        	LA = GREEN;
+        	LB = RED;
       	end
       S1:
         begin
-        	LA <= YELLOW;
-      		LB <= RED;
+        	LA = YELLOW;
+      		LB = RED;
         end
       S2:
         begin
-        	LA <= RED;
-      		LB <= GREEN;
+        	LA = RED;
+      		LB = GREEN;
         end
       S3:
         begin
-        	LA <= RED;
-      		LB <= YELLOW;
+        	LA = RED;
+      		LB = YELLOW;
         end
     endcase
   end
