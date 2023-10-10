@@ -10,9 +10,9 @@ module mux8(
     
     always_comb begin
         if(sel[2])
-            Y <= int1;
+            Y = int1;
         else
-            Y <= int0;
+            Y = int0;
     end
 endmodule
 
@@ -20,13 +20,13 @@ module mux4(input logic D0, D1, D2, D3, input logic[1:0] sel, output logic Y);
     always_comb begin
         case(sel)
             2'b00:
-                Y <= D0;
+                Y = D0;
             2'b01:
-                Y <= D1;
+                Y = D1;
             2'b10:
-                Y <= D2;
+                Y = D2;
             2'b11:
-                Y <= D3;
+                Y = D3;
         endcase
     end
 endmodule
